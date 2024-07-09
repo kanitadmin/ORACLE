@@ -1,0 +1,47 @@
+version: "3.8"
+services:
+  mssql:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: mssql
+    restart: always
+    ports:
+      - 1521:1521
+      - 5500:5500
+      - 2484:2484
+    volumes:
+      - oracle_data:/opt/oracle/oradata
+      - oracle_startup:/opt/oracle/scripts/startup
+      - oracle_setup:/opt/oracle/scripts/setup
+    environment:
+      - TZ=Asia/Bangkok
+      - ORACLE_SID=
+      - ORACLE_PDB=
+      - ORACLE_PWD=
+      - INIT_CPU_COUNT=
+      - INIT_PROCESSES=
+      - AUTO_MEM_CALCULATION=
+      - ORACLE_EDITION=enterprise
+      - ORACLE_CHARACTERSET=AL32UTF8
+      - ENABLE_ARCHIVELOG=true
+      - ENABLE_FORCE_LOGGING=false
+      - ENABLE_TCPS=false
+    networks:
+      - oracle_network
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 1048576
+        hard: 1048576
+    #logging:
+    #  driver: syslog
+    #  options:
+    #    syslog-address: "tcp://127.0.0.1:514"
+    #    tag: "mssql"
+volumes:
+  oracle_data:
+  oracle_startup:
+  oracle_setup:
+networks:
+  mssql_network:
