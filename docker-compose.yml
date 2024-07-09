@@ -14,12 +14,12 @@ services:
       - oracle_setup:/opt/oracle/scripts/setup
     environment:
       - TZ=Asia/Bangkok
-      - ORACLE_SID=
-      - ORACLE_PDB=
-      - ORACLE_PWD=
-      - INIT_CPU_COUNT=
-      - INIT_PROCESSES=
-      - AUTO_MEM_CALCULATION=
+      - ORACLE_SID=${ORACLE_SID}
+      - ORACLE_PDB=${ORACLE_PDB}
+      - ORACLE_PWD=${ORACLE_PWD}
+      - INIT_CPU_COUNT=${INIT_CPU_COUNT}
+      - INIT_PROCESSES=${INIT_PROCESSES}
+      - AUTO_MEM_CALCULATION=true
       - ORACLE_EDITION=enterprise
       - ORACLE_CHARACTERSET=AL32UTF8
       - ENABLE_ARCHIVELOG=true
